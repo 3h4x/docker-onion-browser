@@ -15,12 +15,8 @@ RUN echo "forward-socks5 / 127.0.0.1:9050 ." > /etc/privoxy/config
 RUN echo "listen-address *:8118" >> /etc/privoxy/config
 RUN echo "debug 512" >> /etc/privoxy/config
 
-RUN \
-  mkdir /var/lib/tor/hidden_service && \
-  chown -R debian-tor:debian-tor /var/lib/tor/hidden_service
-
-#RUN echo "http_proxy=\"http://`ifconfig eth0 | grep 'inet addr:' | awk ' { print $2 } ' | cut -f 2 -d\:`:8118\"" > /etc/environment
-#RUN cat /etc/environment
+RUN mkdir /var/lib/tor/hidden_service
+RUN chown -R debian-tor:debian-tor /var/lib/tor/hidden_service
 
 RUN useradd h4x -m -d /home/h4x -s /bin/bash
 ENV DISPLAY :0
